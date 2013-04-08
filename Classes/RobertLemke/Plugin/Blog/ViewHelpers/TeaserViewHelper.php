@@ -41,10 +41,11 @@ class TeaserViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper {
 	 * Render a teaser
 	 *
 	 * @param \TYPO3\TYPO3CR\Domain\Model\PersistentNodeInterface $node
+	 * @param boolean $renderImage
 	 * @return string cropped text
 	 */
-	public function render(PersistentNodeInterface $node) {
-		return $this->contentService->renderTeaser($node);
+	public function render(PersistentNodeInterface $node, $renderImage = FALSE) {
+		return $this->contentService->renderTeaser($node, $renderImage);
 	}
 }
 

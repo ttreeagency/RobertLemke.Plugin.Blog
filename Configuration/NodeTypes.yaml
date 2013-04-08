@@ -144,3 +144,12 @@
 
     # make links in the overview clickable:
     inlineEditable: true
+
+'RobertLemke.Plugin.Blog:TeaserPlugin':
+  superTypes: ['TYPO3.Neos.NodeTypes:Plugin']
+  ui:
+    label: 'Blog Teaser'
+    group: 'Plugins'
+
+    # make links in the overview clickable:
+    inlineEditable: false

@@ -72,6 +72,21 @@ class PostController extends ActionController {
 	}
 
 	/**
+	 * Displays a teaser for the latest blog post
+	 *
+	 * @param string $postsNodePath Path leading to the parent node of blog posts
+	 * @return void
+	 * FIXME Node path needs to be configurable ;-)
+	 */
+	public function teaserAction($postsNodePath = '/sites/robertlemkecom/en/blog') {
+		$context = $this->nodeRepository->getContext();
+		$postNode = $context->getNode($postsNodePath)->getPrimaryChildNode();
+		if ($postNode->getNodeType()->getName() === 'RobertLemke.Plugin.Blog:Post') {
+			$this->view->assign('post', $postNode);
+		}
+	}
+
+	/**
 	 * Renders an RSS feed
 	 *
 	 * @return string

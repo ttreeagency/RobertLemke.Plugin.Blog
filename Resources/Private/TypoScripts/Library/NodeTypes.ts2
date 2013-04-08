@@ -92,3 +92,13 @@ prototype(RobertLemke.Plugin.Blog:Quote) {
 	text = ${q(node).property('text')}
 }
 
+#
+# Teaser
+#
+
+prototype(RobertLemke.Plugin.Blog:TeaserPlugin) < prototype(TYPO3.Neos.NodeTypes:Plugin)
+prototype(RobertLemke.Plugin.Blog:TeaserPlugin) {
+	package = 'RobertLemke.Plugin.Blog'
+	controller = 'Post'
+	action = 'teaser'
+}

@@ -32,10 +32,33 @@ use TYPO3\TYPO3CR\Domain\Model\PersistentNodeInterface;
 class ContentService {
 
 	/**
+	 * @var \TYPO3\Flow\Resource\Publishing\ResourcePublisher
+	 * @Flow\Inject
+	 */
+	protected $resourcePublisher;
+
+	/**
 	 * @param PersistentNodeInterface $node
+	 * @param bool $renderImage
 	 * @return mixed
 	 */
-	public function renderTeaser(PersistentNodeInterface $node) {
+	public function renderTeaser(PersistentNodeInterface $node, $renderImage = FALSE) {
+		$teaser = '';
+		if ($renderImage) {
+			$teaser = $this->renderImage($node);
+		}
+		$teaser .= '<h2>' . $node->getProperty('title') . '</h2>';
+		$teaser .= '<p>' . $this->renderAbstract($node) . '</p>';
+		return $teaser;
+	}
+
+	/**
+	 * Renders an abstract based on the content nodes of the blog post
+	 *
+	 * @param PersistentNodeInterface $node
+	 * @return string
+	 */
+	protected function renderAbstract(PersistentNodeInterface $node) {
 		$stringToTruncate = '';
 
 		foreach ($node->getNode('main')->getChildNodes('TYPO3.Neos.NodeTypes:ContentObject') as $contentNode) {
@@ -78,6 +101,23 @@ class ContentService {
 			$content = substr($content, 3, -4);
 		}
 		return $content;
+	}
+
+	/**
+	 *
+	 */
+	protected function renderImage(PersistentNodeInterface $node) {
+		$imageNodes = $node->getNode('main')->getChildNodes('TYPO3.Neos.NodeTypes:Image');
+		$imageNode = reset($imageNodes);
+		if ($imageNode === FALSE) {
+			return '';
+		}
+
+		/* @var $imageVariant \TYPO3\Media\Domain\Model\Image */
+		$imageVariant = $imageNode->getProperty('image');
+		$teaserImage = $imageVariant->getThumbnail(550);
+
+		return sprintf('<div class="typo3-image"><img src="%s" width="%s" height="%s" alt="" />', $this->resourcePublisher->getPersistentResourceWebUri($teaserImage->getResource()), $teaserImage->getWidth(), $teaserImage->getHeight()) . '</div>';
 	}
 }
 

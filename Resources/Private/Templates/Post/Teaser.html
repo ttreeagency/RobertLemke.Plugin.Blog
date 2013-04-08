@@ -1,0 +1,6 @@
+{namespace blog=RobertLemke\Plugin\Blog\ViewHelpers}
+{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace typo3cr=TYPO3\TYPO3CR\ViewHelpers}
+<neos:link.node node="{post}" class="invisible-link">
+<blog:teaser node="{post}" renderImage="true" />
+</neos:link.node> <neos:link.node node="{post}" class="read-more"><f:translate>Read more</f:translate></neos:link.node>
