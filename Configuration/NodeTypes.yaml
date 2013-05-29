@@ -11,14 +11,26 @@
       groups:
         page:
           label: 'Blog Post'
+          position: 1
         moreinfo:
           label: 'More Info'
+          position: 2
+        image:
+          label: 'Image'
+          position: 3
   childNodes:
     main:
       type: 'TYPO3.Neos:ContentCollection'
     comments:
       type: 'TYPO3.Neos:ContentCollection'
   properties:
+    image:
+      type: TYPO3\Media\Domain\Model\ImageVariant
+      ui:
+        label: 'Image'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'image'
     datePublished:
       type: date
       ui:

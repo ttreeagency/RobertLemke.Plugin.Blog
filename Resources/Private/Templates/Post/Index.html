@@ -23,33 +23,61 @@
 	});
 </script>
 <f:security.ifAuthenticated>
-	<f:form controller="Post" action="create" style="float:right"><f:form.submit class="button" value="+"/></f:form>
+	<div class="admin-toolbar">
+		<f:form controller="Post" action="create">
+			<f:form.submit class="btn btn-primary" value="Publier un nouvel article"/>
+		</f:form>
+	</div>
+	<div class="clearfix"/>
 </f:security.ifAuthenticated>
 <div class="robertlemke-plugin-blog" id="scrolling-container">
 	<f:if condition="{hasPostNodes}">
 		<f:then>
 			<typo3cr:widget.paginate widgetId="posts-paginator" parentNode="{postsNode}" nodeTypeFilter="RobertLemke.Plugin.Blog:Post" as="paginatedPosts" configuration="{itemsPerPage: 5, insertBelow: 1, maximumNumberOfLinks: 15}">
-				<ol class="posts">
+				<section class="posts">
 					<f:for each="{paginatedPosts}" as="post">
-						<li class="post">
-							<h2>
-								<neos:link.node node="{post}">{post.properties.title}</neos:link.node>
-								<f:if condition="{post.removed}"> (removed)</f:if>
-							</h2>
-							<p class="content">
-								<neos:link.node node="{post}" class="invisible-link">
-									<blog:teaser node="{post}"/>
-								</neos:link.node> <neos:link.node node="{post}" class="read-more"><f:translate>Read more</f:translate></neos:link.node>
-							</p>
-						</li>
-						<hr/>
+						<article class="post" style="clear: both;">
+							<neos:link.node node="{post}" class="invisible-link">
+								<header>
+									<h2>
+										{post.properties.title}
+										<f:if condition="{post.removed}"> <f:translate package="RobertLemke.Plugin.Blog">(removed)</f:translate></f:if>
+									</h2>
+								</header>
+								<f:if condition="{post.properties.image}">
+									<f:render partial="Image" arguments="{
+										image: post.properties.image,
+										alternativeText: post.properties.title,
+										title: post.properties.title,
+										maximumWidth: 400,
+										class: 'pull-right'
+									}" />
+								</f:if>
+								<div class="post-content">
+									<p class="content">
+										<blog:teaser node="{post}"/>
+									</p>
+									<div class="author-footnote">
+										Publié par
+										<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+											<span itemprop="name">
+												{post.properties.author}
+											</span>
+										</span>,
+										le
+										<time datetime="{f:format.date(date: node.properties.datePublished, format: 'c')}" itemprop="datePublished"><f:format.date format="l jS F Y">{post.properties.datePublished}</f:format.date></time>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</neos:link.node>
+						</article>
 					</f:for>
-				</ol>
+				</section>
 				{pagination.numberOfPages}
 			</typo3cr:widget.paginate>
 		</f:then>
 		<f:else>
-			<p><f:translate>This blog currently doesn't contain any posts.</f:translate></p>
+			<p><f:translate package="RobertLemke.Plugin.Blog">This blog currently doesn't contain any posts.</f:translate></p>
 		</f:else>
 	</f:if>
 </div>

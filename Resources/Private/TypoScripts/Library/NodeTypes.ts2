@@ -35,6 +35,9 @@ prototype(RobertLemke.Plugin.Blog:Post) < prototype(TYPO3.Neos:Template)
 prototype(RobertLemke.Plugin.Blog:Post) {
 	templatePath = 'resource://RobertLemke.Plugin.Blog/Private/Templates/TypoScript/Post.html'
 	title = ${q(node).property('title')}
+	image = ${q(node).property('image')}
+	maximumWidth = ${q(node).property('maximumWidth')}
+	maximumHeight = ${q(node).property('maximumHeight')}
 
 		# Create a new ContentCollection TypoScript object which inherits the behavior of the
 		# default section (which renders a collection of content elements).
