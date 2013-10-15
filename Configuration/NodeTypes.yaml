@@ -4,9 +4,7 @@
     - 'TYPO3.Neos:Document'
   ui:
     label: 'Blog Post'
-    icon:
-      light: Images/Icons/White/doc_empty_icon-16.png
-      dark: Images/Icons/Black/doc_empty_icon-16.png
+    icon: 'icon-pinterest'
     inspector:
       groups:
         page:
