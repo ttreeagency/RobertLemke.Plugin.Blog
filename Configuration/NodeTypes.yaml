@@ -138,22 +138,6 @@
       ui:
         inlineEditable: true
 
-'RobertLemke.Plugin.Blog:TeaserPlugin':
-  superTypes:
-    - 'TYPO3.Neos:Plugin'
-  ui:
-    label: 'Blog Teaser'
-    group: 'Plugins'
-    inlineEditable: false
-  properties:
-    postsNodePath:
-      type: string
-      ui:
-        label: 'Posts Node Path'
-        reloadIfChanged: true
-        inspector:
-          group: 'pluginSettings'
-
 'RobertLemke.Plugin.Blog:PostPlugin':
   superTypes:
     - 'TYPO3.Neos:Plugin'
