@@ -54,7 +54,7 @@
     - 'TYPO3.Neos:Content'
   ui:
     label: 'Blog Comment'
-    group: General
+    group: general
     inspector:
       groups:
         comment:
@@ -97,7 +97,7 @@
   superTypes:
     - 'TYPO3.Neos:Content'
   ui:
-    group: General
+    group: general
     label: 'Blog Quote'
     inspector:
       groups:
@@ -143,5 +143,5 @@
     - 'TYPO3.Neos:Plugin'
   ui:
     label: 'Blog Post Overview'
-    group: Plugins
+    group: plugin
     inlineEditable: true
