@@ -35,15 +35,20 @@
 							<header>
 								<h2>
 									<neos:link.node node="{post}">{post.properties.title}</neos:link.node>
-									<f:if condition="{post.removed}"> (removed)</f:if>
 								</h2>
+								<div class="byline text-light">
+									Publié le
+									<time datetime="{f:format.date(date: post.properties.datePublished, format: 'c')}" itemprop="datePublished"><f:format.date forceLocale="fr" localeFormatType="date">{post.properties.datePublished}</f:format.date></time>
+									par
+									<span itemprop="author" itemscope="" itemtype="http://schema.org/Person"><span itemprop="name">{post.properties.author}</span></span>
+								</div>
 							</header>
-							<blog:thumbnail node="{post}" alt="{post.properties.title}" maximumWidth="230" class="img-polaroid pull-left" />
 							<p class="content">
 								<neos:link.node node="{post}" class="invisible-link">
 									<blog:teaser node="{post}"/>
 								</neos:link.node> <neos:link.node node="{post}" class="read-more"><f:translate package="RobertLemke.Plugin.Blog">Read more</f:translate></neos:link.node>
 							</p>
+							<div class="clearfix"></div>
 						</article>
 					</f:for>
 				</section>
