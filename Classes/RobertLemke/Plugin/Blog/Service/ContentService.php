@@ -49,19 +49,19 @@ class ContentService {
 			}
 		}
 
-		$jumpPosition = strpos($stringToTruncate, '<!-- read more -->');
+		$jumpPosition = mb_strpos($stringToTruncate, '<!-- read more -->');
 
 		if ($jumpPosition !== FALSE) {
 			return $this->stripUnwantedTags(substr($stringToTruncate, 0, ($jumpPosition - 1)));
 		}
 
-		$jumpPosition = strpos($stringToTruncate, '</p>');
+		$jumpPosition = mb_strpos($stringToTruncate, '</p>');
 		if ($jumpPosition !== FALSE && $jumpPosition < $maxCharacters) {
-			return $this->stripUnwantedTags(substr($stringToTruncate, 0, $jumpPosition + 4));
+			return $this->stripUnwantedTags(mb_substr($stringToTruncate, 0, $jumpPosition + 4));
 		}
 
-		if (strlen($stringToTruncate) > $maxCharacters) {
-			return substr($this->stripUnwantedTags($stringToTruncate), 0, $maxCharacters + 1) . ' ...';
+		if (mb_strlen($stringToTruncate) > $maxCharacters) {
+			return mb_substr($this->stripUnwantedTags($stringToTruncate), 0, $maxCharacters + 1) . ' ...';
 		} else {
 			return $this->stripUnwantedTags($stringToTruncate);
 		}
@@ -99,13 +99,9 @@ class ContentService {
 	 * @return string The stripped content
 	 */
 	protected function stripUnwantedTags($content) {
-		$content = trim($content);
-		$content = strip_tags($content);
+		$content = preg_replace('/(?:<|&lt;)\/?([a-z]+) *[^\/(?:<|&lt;)]*?(?:>|&gt;)/', '', $content);
 		$content = str_replace('&nbsp;', ' ', $content);
 
-		if (substr($content, 0, 3) === '<p>' && substr($content, -4, 4) === '</p>') {
-			$content = substr($content, 3, -4);
-		}
 		return trim($content);
 	}
 }
