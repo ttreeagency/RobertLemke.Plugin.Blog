@@ -99,7 +99,7 @@ class ContentService {
 	 * @return string The stripped content
 	 */
 	protected function stripUnwantedTags($content) {
-		$content = preg_replace('/(?:<|&lt;)\/?([a-z]+) *[^\/(?:<|&lt;)]*?(?:>|&gt;)/', '', $content);
+		$content = strip_tags($content);
 		$content = str_replace('&nbsp;', ' ', $content);
 
 		return trim($content);
