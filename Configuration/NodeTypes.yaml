@@ -143,5 +143,5 @@
     - 'TYPO3.Neos:Plugin'
   ui:
     label: 'Blog Post Overview'
-    group: plugin
+    group: plugins
     inlineEditable: true
