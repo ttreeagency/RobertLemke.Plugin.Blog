@@ -33,12 +33,6 @@
 								<h2>
 									<neos:link.node node="{post}">{post.properties.title}</neos:link.node>
 								</h2>
-								<div class="byline text-light">
-									Publié le
-									<time datetime="{f:format.date(date: post.properties.datePublished, format: 'c')}" itemprop="datePublished"><f:format.date forceLocale="fr" localeFormatType="date">{post.properties.datePublished}</f:format.date></time>
-									par
-									<span itemprop="author" itemscope="" itemtype="http://schema.org/Person"><span itemprop="name">{post.properties.author}</span></span>
-								</div>
 							</header>
 							<p class="content">
 								<neos:link.node node="{post}" class="invisible-link">
