@@ -22,7 +22,9 @@ namespace RobertLemke\Plugin\Blog\Service;
  *                                                                        */
 
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Utility\Unicode\TextIterator;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
+use TYPO3\Flow\Utility\Unicode\Functions as UnicodeFunctions;
 
 /**
  * A service which can render specific views of blog related content
@@ -35,10 +37,10 @@ class ContentService {
 	 * Renders the given Node as a teaser text with up to 600 characters, with all <p> and <a> tags removed.
 	 *
 	 * @param NodeInterface $node
-	 * @param integer $maxCharacters Place where to truncate the string
+	 * @param integer $maximumCharacters Place where to truncate the string
 	 * @return mixed
 	 */
-	public function renderTeaser(NodeInterface $node, $maxCharacters = 600) {
+	public function renderTeaser(NodeInterface $node, $maximumCharacters = 600) {
 		$stringToTruncate = '';
 
 		foreach ($node->getNode('main')->getChildNodes('TYPO3.Neos.NodeTypes:Text') as $contentNode) {
@@ -56,12 +58,15 @@ class ContentService {
 		}
 
 		$jumpPosition = mb_strpos($stringToTruncate, '</p>');
-		if ($jumpPosition !== FALSE && $jumpPosition < $maxCharacters) {
+		if ($jumpPosition !== FALSE && $jumpPosition < $maximumCharacters) {
 			return $this->stripUnwantedTags(mb_substr($stringToTruncate, 0, $jumpPosition + 4));
 		}
 
-		if (mb_strlen($stringToTruncate) > $maxCharacters) {
-			return mb_substr($this->stripUnwantedTags($stringToTruncate), 0, $maxCharacters + 1) . ' ...';
+		if (mb_strlen($stringToTruncate) > $maximumCharacters) {
+			$iterator = new TextIterator(strip_tags($stringToTruncate), TextIterator::WORD);
+			$string = UnicodeFunctions::substr(strip_tags($stringToTruncate), 0, $iterator->preceding($maximumCharacters));
+			$string .= '&nbsp;...';
+			return $string;
 		} else {
 			return $this->stripUnwantedTags($stringToTruncate);
 		}
