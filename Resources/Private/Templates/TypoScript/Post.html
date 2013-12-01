@@ -6,9 +6,11 @@
 		<h1 itemprop="name headline">{title}</h1>
 		<div class="byline">
 			Publié le
-			<time datetime="{f:format.date(date: node.properties.datePublished, format: 'c')}" itemprop="datePublished"><f:format.date forceLocale="fr" localeFormatType="date">{node.properties.datePublished}</f:format.date></time>
-			par
-			<span itemprop="author" itemscope="" itemtype="http://schema.org/Person"><span itemprop="name">{node.properties.author}</span></span>
+			<time datetime="{f:format.date(date: node.properties.datePublished, format: 'c')}" itemprop="datePublished"><f:format.date forceLocale="fr" localeFormatType="date" localeFormatLength="full">{node.properties.datePublished}</f:format.date></time>
+			<f:if condition="{node.properties.author}">
+				par <span itemprop="author" itemscope="" itemtype="http://schema.org/Person"><span itemprop="name">{node.properties.author}</span></span>
+			</f:if>
+
 		</div>
 	</header>
 	<div itemprop="articleBody">
