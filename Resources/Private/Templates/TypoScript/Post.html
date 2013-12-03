@@ -1,6 +1,6 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
 {namespace ts=TYPO3\TypoScript\ViewHelpers}
-<article itemscope="" itemtype="http://schema.org/Article" class="robertlemke-plugin-blog" xmlns:f="http://www.w3.org/1999/html">
+<article itemscope itemtype="http://schema.org/Article" class="robertlemke-plugin-blog">
 	<f:flashMessages class="flashmessages" />
 	<header>
 		<h1 itemprop="name headline">{title}</h1>
@@ -8,7 +8,7 @@
 			Publié le
 			<time datetime="{f:format.date(date: node.properties.datePublished, format: 'c')}" itemprop="datePublished"><f:format.date forceLocale="fr" localeFormatType="date" localeFormatLength="full">{node.properties.datePublished}</f:format.date></time>
 			<f:if condition="{node.properties.author}">
-				par <span itemprop="author" itemscope="" itemtype="http://schema.org/Person"><span itemprop="name">{node.properties.author}</span></span>
+				par <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{node.properties.author}</span></span>
 			</f:if>
 
 		</div>
