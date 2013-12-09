@@ -24,7 +24,7 @@ prototype(TYPO3.Neos:PrimaryContent).blogPost {
 # through the TypoScript collection feature.
 #
 
-prototype(RobertLemke.Plugin.Blog:Post) < prototype(TYPO3.TypoScript:Template)
+prototype(RobertLemke.Plugin.Blog:Post) < prototype(TYPO3.Neos:Document)
 prototype(RobertLemke.Plugin.Blog:Post) {
 	templatePath = 'resource://RobertLemke.Plugin.Blog/Private/Templates/TypoScript/Post.html'
 	title = ${q(node).property('title')}
