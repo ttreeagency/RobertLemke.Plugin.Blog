@@ -24,7 +24,7 @@ prototype(TYPO3.Neos:PrimaryContent).blogPost {
 # through the TypoScript collection feature.
 #
 
-prototype(RobertLemke.Plugin.Blog:Post) < prototype(TYPO3.Neos:Template)
+prototype(RobertLemke.Plugin.Blog:Post) < prototype(TYPO3.TypoScript:Template)
 prototype(RobertLemke.Plugin.Blog:Post) {
 	templatePath = 'resource://RobertLemke.Plugin.Blog/Private/Templates/TypoScript/Post.html'
 	title = ${q(node).property('title')}
@@ -53,7 +53,7 @@ prototype(RobertLemke.Plugin.Blog:Post) {
 # Blog Comment is rendered by a vanilla Template-based TypoScript object
 #
 
-prototype(RobertLemke.Plugin.Blog:Comment) < prototype(TYPO3.Neos:Template)
+prototype(RobertLemke.Plugin.Blog:Comment) < prototype(TYPO3.Neos:Content)
 prototype(RobertLemke.Plugin.Blog:Comment) {
 	templatePath = 'resource://RobertLemke.Plugin.Blog/Private/Templates/TypoScript/Comment.html'
 	text = ${q(node).property('text')}
@@ -75,7 +75,7 @@ prototype(RobertLemke.Plugin.Blog:PostPlugin) {
 # Quote is a straight-forward content type
 #
 
-prototype(RobertLemke.Plugin.Blog:Quote) < prototype(TYPO3.Neos:Template)
+prototype(RobertLemke.Plugin.Blog:Quote) < prototype(TYPO3.Neos:Content)
 prototype(RobertLemke.Plugin.Blog:Quote) {
 	templatePath = 'resource://RobertLemke.Plugin.Blog/Private/Templates/TypoScript/Quote.html'
 	citeAuthor = ${q(node).property('citeAuthor')}
