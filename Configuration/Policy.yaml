@@ -2,11 +2,7 @@
 resources:
   methods:
     'RobertLemke_Plugin_Blog_PostController': method(public RobertLemke\Plugin\Blog\Controller\PostController->.*Action())
-    'RobertLemke_Plugin_Blog_CreatePost': method(public RobertLemke\Plugin\Blog\Controller\PostController->createAction())
 acls:
   'Everybody':
     methods:
       'RobertLemke_Plugin_Blog_PostController': GRANT
-  'TYPO3.Neos:Editor':
-    methods:
-      'RobertLemke_Plugin_Blog_CreatePost': GRANT
