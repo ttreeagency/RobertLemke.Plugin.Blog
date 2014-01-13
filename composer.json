@@ -13,9 +13,7 @@
 	],
 	"require":{
 		"typo3/flow":">=2.0.0",
-		"typo3/neos":">=1.0.0",
-		"robertlemke/akismet":"~1.0",
-		"robertlemke/rss":"dev-master"
+		"typo3/neos":">=1.0.0"
 	},
 	"suggest":{
 		"typo3/swiftmailer": "Allows sending notification emails on new comments"
