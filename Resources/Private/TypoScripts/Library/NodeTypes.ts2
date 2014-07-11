@@ -31,20 +31,23 @@ prototype(RobertLemke.Plugin.Blog:Post) {
 
 		# Create a new ContentCollection TypoScript object which inherits the behavior of the
 		# default section (which renders a collection of content elements).
-	main = TYPO3.Neos:ContentCollection
-
-		# The name of the section node to be rendered is also "main"
-	main.nodePath = 'main'
+	main = TYPO3.Neos:ContentCollection {
+		nodePath = 'main'
+		@cache {
+			mode = 'cached'
+		}
+	}
 
 		# Create a similar ContentCollection TypoScript object for comments, but set the
 		# node path leading to the section to "comments" because it is a sub node
 		# of the current node (which is a Post node)
-	comments = TYPO3.Neos:ContentCollection
-	comments.nodePath = 'comments'
-
-		# Override the collection query for comments in order to filter out any
-		# entries flagged as spam
-	comments.collection = ${q(node).is('[instanceof TYPO3.Neos:ContentCollection]') ? q(node).children("[spam = false]") : q(node).children(this.nodePath).children("[spam = false]")}
+	comments = TYPO3.Neos:ContentCollection {
+		nodePath = 'main'
+		collection = ${q(node).is('[instanceof TYPO3.Neos:ContentCollection]') ? q(node).children("[spam = false]") : q(node).children(this.nodePath).children("[spam = false]")}
+		@cache {
+			mode = 'cached'
+		}
+	}
 
 	numberOfComments = ${q(node).children('comments').children("[spam = false]").count()}
 }
